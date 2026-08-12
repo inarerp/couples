@@ -9,202 +9,116 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
-    /* ============ VARIABLES ============ */
     :root {
-      --color-primary: #EC4899;
-      --color-primary-dark: #BE185D;
-      --color-secondary: #8B5CF6;
-      --color-accent: #F59E0B;
-      --color-bg: #FDF2F8;
-      --color-bg-2: #F3E8FF;
-      --color-bg-3: #FCE7F3;
-      --color-card: #FFFFFF;
-      --color-text: #1F2937;
-      --color-text-light: #6B7280;
-      --color-border: rgba(236, 72, 153, 0.08);
-      --color-husband: #3B82F6;
-      --color-wife: #EF4444;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
-      --shadow-glow: 0 4px 20px rgba(236, 72, 153, 0.35);
-      --radius-sm: 12px;
-      --radius-md: 18px;
-      --radius-lg: 24px;
+      --color-primary: #EC4899; --color-primary-dark: #BE185D; --color-secondary: #8B5CF6;
+      --color-accent: #F59E0B; --color-bg: #FDF2F8; --color-bg-2: #F3E8FF; --color-bg-3: #FCE7F3;
+      --color-card: #FFFFFF; --color-text: #1F2937; --color-text-light: #6B7280;
+      --color-border: rgba(236, 72, 153, 0.08); --color-husband: #3B82F6; --color-wife: #EF4444;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04); --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.1); --shadow-glow: 0 4px 20px rgba(236,72,153,0.35);
+      --radius-sm: 12px; --radius-md: 18px; --radius-lg: 24px;
       --font: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Arial, sans-serif;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { height: 100%; overflow: hidden; }
-
-    body {
-      font-family: var(--font);
-      background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-2) 50%, var(--color-bg-3) 100%);
-      color: var(--color-text);
-      -webkit-font-smoothing: antialiased;
-      overscroll-behavior: none;
-    }
-
+    body { font-family: var(--font); background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-2) 50%, var(--color-bg-3) 100%); color: var(--color-text); -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
-    button:focus-visible { outline: 3px solid rgba(236, 72, 153, 0.4); outline-offset: 2px; }
+    button:focus-visible { outline: 3px solid rgba(236,72,153,0.4); outline-offset: 2px; }
     #app { height: 100%; position: relative; }
     .hidden { display: none !important; }
 
-    /* ============ PAGES ============ */
-    .page {
-      position: fixed; inset: 0;
-      overflow-y: auto; overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: contain;
-      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 100%);
-      transform: translateX(100%); opacity: 0; pointer-events: none; z-index: 1;
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
-    }
+    .page { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 100%); transform: translateX(100%); opacity: 0; pointer-events: none; z-index: 1; transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s ease; }
     .page.active { transform: translateX(0); opacity: 1; pointer-events: auto; z-index: 10; }
     .page.slide-out-left { transform: translateX(-100%); opacity: 0; }
 
-    /* ============ HOME ============ */
     .hero { text-align: center; padding: 60px 24px 32px; position: relative; }
     .hero::before, .hero::after { content: '✨'; position: absolute; font-size: 20px; opacity: 0.5; animation: float 3s ease-in-out infinite; }
     .hero::before { top: 35px; right: 15%; }
     .hero::after { top: 55px; left: 15%; animation-delay: 1.5s; content: '💫'; }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-    .hero-title {
-      font-size: clamp(2rem, 8vw, 3rem); font-weight: 900;
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 14px; line-height: 1.3;
-    }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .hero-title { font-size: clamp(2rem,8vw,3rem); font-weight: 900; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 14px; line-height: 1.3; }
     .hero-title .heart { -webkit-text-fill-color: var(--color-primary); display: inline-block; animation: heartbeat 1.8s ease-in-out infinite; }
-    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.15); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.15); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } }
     .hero-subtitle { font-size: 1.1rem; color: var(--color-text-light); line-height: 1.6; }
-
     .games-section-title { text-align: center; font-size: 0.85rem; font-weight: 500; color: var(--color-text-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; }
-
     .games-grid { padding: 0 20px 60px; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-
-    .game-card {
-      background: var(--color-card); border-radius: var(--radius-md); padding: 18px 20px;
-      display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow-md);
-      cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 1px solid var(--color-border); position: relative; overflow: hidden;
-    }
+    .game-card { background: var(--color-card); border-radius: var(--radius-md); padding: 18px 20px; display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow-md); cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; border: 1px solid var(--color-border); position: relative; overflow: hidden; }
     .game-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(236,72,153,0.03), rgba(139,92,246,0.03)); opacity: 0; transition: opacity 0.3s; }
     .game-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
     .game-card:hover::after { opacity: 1; }
     .game-card:active { transform: translateY(-1px) scale(0.98); }
     .game-card.coming-soon { opacity: 0.55; cursor: not-allowed; }
     .game-card.coming-soon:hover { transform: none; }
-
-    .card-icon { width: 52px; height: 52px; border-radius: var(--radius-sm); background: linear-gradient(135deg, #FDF2F8, #F3E8FF); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; z-index: 1; }
+    .card-icon { width: 52px; height: 52px; border-radius: var(--radius-sm); background: linear-gradient(135deg,#FDF2F8,#F3E8FF); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; z-index: 1; }
     .card-body { flex: 1; min-width: 0; z-index: 1; }
     .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 3px; }
     .card-desc { font-size: 0.85rem; color: var(--color-text-light); }
     .card-arrow { color: var(--color-primary); font-size: 1.4rem; font-weight: bold; flex-shrink: 0; z-index: 1; transition: transform 0.2s; }
     .game-card:hover .card-arrow { transform: translateX(-4px); }
-    .card-badge { background: linear-gradient(135deg, #F3E8FF, #FCE7F3); color: var(--color-secondary); font-size: 0.7rem; padding: 5px 12px; border-radius: 12px; font-weight: 700; flex-shrink: 0; z-index: 1; }
+    .card-badge { background: linear-gradient(135deg,#F3E8FF,#FCE7F3); color: var(--color-secondary); font-size: 0.7rem; padding: 5px 12px; border-radius: 12px; font-weight: 700; flex-shrink: 0; z-index: 1; }
 
-    /* ============ SHARED GAME UI ============ */
-    .page-header {
-      display: flex; align-items: center; gap: 14px; padding: 14px 18px;
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(253, 242, 248, 0.85);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    }
+    .page-header { display: flex; align-items: center; gap: 14px; padding: 14px 18px; position: sticky; top: 0; z-index: 100; background: rgba(253,242,248,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.5); }
     .btn-back { width: 42px; height: 42px; border-radius: var(--radius-sm); background: var(--color-card); border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--color-text-light); transition: all 0.2s; box-shadow: var(--shadow-sm); flex-shrink: 0; }
     .btn-back:hover { background: #F9FAFB; color: var(--color-primary); transform: scale(1.05); }
     .btn-back:active { transform: scale(0.95); }
     .page-title { font-size: 1.15rem; font-weight: 700; }
-
     .btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; padding: 12px 28px; border-radius: 16px; font-size: 0.95rem; font-weight: 700; box-shadow: var(--shadow-glow); transition: transform 0.2s, box-shadow 0.2s; }
-    .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5); }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(236,72,153,0.5); }
     .btn-primary:active:not(:disabled) { transform: translateY(0) scale(0.97); }
     .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; animation: btnPulse 1.2s ease-in-out infinite; }
-    @keyframes btnPulse { 0%, 100% { box-shadow: var(--shadow-glow); } 50% { box-shadow: 0 6px 30px rgba(236, 72, 153, 0.6); } }
-
+    @keyframes btnPulse { 0%,100% { box-shadow: var(--shadow-glow); } 50% { box-shadow: 0 6px 30px rgba(236,72,153,0.6); } }
     .btn-secondary { background: var(--color-card); color: var(--color-text); border: 1px solid rgba(0,0,0,0.08); padding: 12px 24px; border-radius: 16px; font-size: 0.95rem; font-weight: 600; transition: all 0.2s; box-shadow: var(--shadow-sm); }
     .btn-secondary:hover { background: #F9FAFB; transform: translateY(-1px); }
 
-    /* ============ DOUBLE WHEEL ============ */
     .spin-all-container { text-align: center; padding: 20px 20px 8px; }
-
     .wheels-container { display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 24px 20px; }
     @media (min-width: 768px) { .wheels-container { flex-direction: row; justify-content: center; align-items: flex-start; gap: 48px; } }
-
     .wheel-block { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 320px; }
     .wheel-label { font-size: 1rem; font-weight: 700; background: var(--color-card); padding: 8px 20px; border-radius: 20px; box-shadow: var(--shadow-sm); }
     .wheel-count { font-size: 0.75rem; color: var(--color-text-light); background: var(--color-card); padding: 4px 12px; border-radius: 12px; box-shadow: var(--shadow-sm); }
-
-    .wheel-wrapper { position: relative; width: min(78vw, 280px); height: min(78vw, 280px); filter: drop-shadow(0 12px 30px rgba(236, 72, 153, 0.15)); }
-
-    .wheel {
-      width: 100%; height: 100%; border-radius: 50%; position: relative;
-      border: 6px solid white;
-      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15), inset 0 0 30px rgba(255, 255, 255, 0.3);
-      transform: rotate(0deg); will-change: transform;
-      transition: transform 4s cubic-bezier(0.15, 0.85, 0.22, 1);
-    }
+    .wheel-wrapper { position: relative; width: min(78vw, 280px); height: min(78vw, 280px); filter: drop-shadow(0 12px 30px rgba(236,72,153,0.15)); }
+    .wheel { width: 100%; height: 100%; border-radius: 50%; position: relative; border: 6px solid white; box-shadow: 0 0 0 3px rgba(236,72,153,0.15), inset 0 0 30px rgba(255,255,255,0.3); transform: rotate(0deg); will-change: transform; transition: transform 4s cubic-bezier(0.15,0.85,0.22,1); }
     .wheel.just-stopped { animation: wheelGlow 1.2s ease; }
-    @keyframes wheelGlow {
-      0% { box-shadow: 0 0 0 3px rgba(236,72,153,0.15), inset 0 0 30px rgba(255,255,255,0.3); }
-      50% { box-shadow: 0 0 0 8px rgba(236,72,153,0.35), 0 0 40px rgba(236,72,153,0.4), inset 0 0 30px rgba(255,255,255,0.5); }
-      100% { box-shadow: 0 0 0 3px rgba(236,72,153,0.15), inset 0 0 30px rgba(255,255,255,0.3); }
-    }
-
+    @keyframes wheelGlow { 0% { box-shadow: 0 0 0 3px rgba(236,72,153,0.15), inset 0 0 30px rgba(255,255,255,0.3); } 50% { box-shadow: 0 0 0 8px rgba(236,72,153,0.35), 0 0 40px rgba(236,72,153,0.4), inset 0 0 30px rgba(255,255,255,0.5); } 100% { box-shadow: 0 0 0 3px rgba(236,72,153,0.15), inset 0 0 30px rgba(255,255,255,0.3); } }
     .wheel-pointer { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); z-index: 25; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
     .wheel-pointer::before { content: ''; width: 16px; height: 16px; background: linear-gradient(135deg, var(--color-primary), #F472B6); border-radius: 50%; margin-bottom: -3px; box-shadow: 0 2px 8px rgba(236,72,153,0.6), 0 0 0 2px white; }
     .wheel-pointer::after { content: ''; width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid var(--color-primary); filter: drop-shadow(0 4px 8px rgba(236,72,153,0.5)); }
-
-    .spin-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); border: 4px solid white; color: white; font-size: 0.85rem; font-weight: 700; box-shadow: 0 6px 20px rgba(236,72,153,0.45), inset 0 2px 4px rgba(255,255,255,0.3); z-index: 15; transition: transform 0.2s; }
-    .spin-btn:hover:not(:disabled) { transform: translate(-50%, -50%) scale(1.08); }
-    .spin-btn:active:not(:disabled) { transform: translate(-50%, -50%) scale(0.95); }
+    .spin-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); border: 4px solid white; color: white; font-size: 0.85rem; font-weight: 700; box-shadow: 0 6px 20px rgba(236,72,153,0.45), inset 0 2px 4px rgba(255,255,255,0.3); z-index: 15; transition: transform 0.2s; }
+    .spin-btn:hover:not(:disabled) { transform: translate(-50%,-50%) scale(1.08); }
+    .spin-btn:active:not(:disabled) { transform: translate(-50%,-50%) scale(0.95); }
     .spin-btn:disabled { cursor: not-allowed; animation: btnPulse 1.2s ease-in-out infinite; }
-
     .wheel-emoji { position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-top: -20px; margin-left: -20px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2)); pointer-events: none; }
 
-    /* Result Card */
-    .combination-result {
-      margin: 8px auto 40px; max-width: 420px;
-      background: var(--color-card); border-radius: var(--radius-lg); padding: 24px;
-      text-align: center; box-shadow: var(--shadow-lg); border: 1px solid rgba(236,72,153,0.1);
-      animation: resultSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
+    .combination-result { margin: 8px auto 40px; max-width: 420px; background: var(--color-card); border-radius: var(--radius-lg); padding: 24px; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid rgba(236,72,153,0.1); animation: resultSlideIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
     @keyframes resultSlideIn { from { opacity: 0; transform: translateY(25px) scale(0.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
-    .result-image { width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-md); overflow: hidden; position: relative; background: linear-gradient(135deg, #FDF2F8, #F3E8FF); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .result-image { width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-md); overflow: hidden; position: relative; background: linear-gradient(135deg,#FDF2F8,#F3E8FF); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
     .result-image .placeholder-emoji { font-size: 64px; position: absolute; z-index: 1; }
-    .result-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; }
+    .result-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2; padding: 6px; }
+    .result-image.img-loaded .placeholder-emoji, .result-image.img-loaded .placeholder-note { display: none; }
     .placeholder-note { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--color-text-light); background: rgba(255,255,255,0.75); padding: 3px 14px; border-radius: 10px; z-index: 1; white-space: nowrap; }
-
     .result-name-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
     .result-title { font-size: 1.35rem; font-weight: 800; direction: ltr; }
-    .icon-btn { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #FDF2F8, #F3E8FF); border: 1px solid rgba(0,0,0,0.05); font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; flex-shrink: 0; }
+    .icon-btn { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg,#FDF2F8,#F3E8FF); border: 1px solid rgba(0,0,0,0.05); font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; flex-shrink: 0; }
     .icon-btn:hover { transform: scale(1.08); }
     .icon-btn:active { transform: scale(0.94); }
-    .result-place { font-size: 1rem; color: var(--color-primary); font-weight: 600; background: linear-gradient(135deg, #FDF2F8, #FCE7F3); display: inline-block; padding: 6px 18px; border-radius: 16px; }
+    .result-place { font-size: 1rem; color: var(--color-primary); font-weight: 600; background: linear-gradient(135deg,#FDF2F8,#FCE7F3); display: inline-block; padding: 6px 18px; border-radius: 16px; }
     .result-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
 
-    /* Bottom Sheet */
     .sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1100; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .sheet-overlay.active { opacity: 1; pointer-events: auto; }
-    .sheet-content { background: var(--color-card); width: 100%; max-width: 520px; border-radius: 24px 24px 0 0; padding: 14px 24px 32px; transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); max-height: 70vh; overflow-y: auto; text-align: center; }
+    .sheet-content { background: var(--color-card); width: 100%; max-width: 520px; border-radius: 24px 24px 0 0; padding: 14px 24px 32px; transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); max-height: 70vh; overflow-y: auto; text-align: center; }
     .sheet-overlay.active .sheet-content { transform: translateY(0); }
     .sheet-handle { width: 44px; height: 5px; border-radius: 3px; background: rgba(0,0,0,0.12); margin: 0 auto 18px; }
     .sheet-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; direction: ltr; color: var(--color-primary); }
     .sheet-text { font-size: 1rem; line-height: 1.9; margin-bottom: 22px; }
 
-    /* Toast */
-    .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1F2937; color: white; padding: 10px 22px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; z-index: 1200; opacity: 0; transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; box-shadow: var(--shadow-lg); }
+    .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1F2937; color: white; padding: 10px 22px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; z-index: 1200; opacity: 0; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; box-shadow: var(--shadow-lg); }
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-    /* ============ BOARD GAME ============ */
     .board-container { padding: 16px 16px 40px; max-width: 520px; margin: 0 auto; }
     .turn-indicator { text-align: center; padding: 12px 20px; border-radius: var(--radius-md); font-weight: 700; margin-bottom: 16px; transition: all 0.3s; box-shadow: var(--shadow-sm); }
-    .turn-indicator.husband { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); color: var(--color-husband); border: 1px solid rgba(59,130,246,0.2); }
-    .turn-indicator.wife { background: linear-gradient(135deg, #FEF2F2, #FECACA); color: var(--color-wife); border: 1px solid rgba(239,68,68,0.2); }
-
+    .turn-indicator.husband { background: linear-gradient(135deg,#EFF6FF,#DBEAFE); color: var(--color-husband); border: 1px solid rgba(59,130,246,0.2); }
+    .turn-indicator.wife { background: linear-gradient(135deg,#FEF2F2,#FECACA); color: var(--color-wife); border: 1px solid rgba(239,68,68,0.2); }
     .players-info { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; }
     .player-badge { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; background: var(--color-card); box-shadow: var(--shadow-sm); transition: all 0.3s; opacity: 0.6; }
     .player-badge.active { opacity: 1; transform: scale(1.05); box-shadow: var(--shadow-md); }
@@ -213,47 +127,40 @@
     .player-dot { width: 12px; height: 12px; border-radius: 50%; }
     .player-dot.husband { background: var(--color-husband); }
     .player-dot.wife { background: var(--color-wife); }
-
     .game-message { text-align: center; padding: 10px 16px; border-radius: var(--radius-sm); background: var(--color-card); box-shadow: var(--shadow-sm); margin-bottom: 16px; font-size: 0.9rem; min-height: 42px; display: flex; align-items: center; justify-content: center; }
-
-    .board-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 20px; }
+    .board-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; margin-bottom: 20px; }
     .tile { aspect-ratio: 1; border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; background: var(--color-card); box-shadow: var(--shadow-sm); min-height: 56px; }
     .tile-icon { font-size: 18px; line-height: 1; }
     .tile-num { position: absolute; top: 3px; right: 5px; font-size: 8px; color: rgba(0,0,0,0.25); font-weight: 600; }
-    .tile.start { background: linear-gradient(135deg, #D1FAE5, #A7F3D0); }
-    .tile.finish { background: linear-gradient(135deg, #FDE68A, #FCD34D); }
-    .tile.challenge { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
-    .tile.romantic { background: linear-gradient(135deg, #FCE7F3, #FBCFE8); }
-    .tile.advance { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
-    .tile.back { background: linear-gradient(135deg, #FFEDD5, #FED7AA); }
-    .tile.bonus { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
-    .tile.loseTurn { background: linear-gradient(135deg, #F3F4F6, #E5E7EB); }
+    .tile.start { background: linear-gradient(135deg,#D1FAE5,#A7F3D0); }
+    .tile.finish { background: linear-gradient(135deg,#FDE68A,#FCD34D); }
+    .tile.challenge { background: linear-gradient(135deg,#EDE9FE,#DDD6FE); }
+    .tile.romantic { background: linear-gradient(135deg,#FCE7F3,#FBCFE8); }
+    .tile.advance { background: linear-gradient(135deg,#DBEAFE,#BFDBFE); }
+    .tile.back { background: linear-gradient(135deg,#FFEDD5,#FED7AA); }
+    .tile.bonus { background: linear-gradient(135deg,#FEF3C7,#FDE68A); }
+    .tile.loseTurn { background: linear-gradient(135deg,#F3F4F6,#E5E7EB); }
     .tile.current-husband { box-shadow: 0 0 0 3px var(--color-husband), var(--shadow-md); }
     .tile.current-wife { box-shadow: 0 0 0 3px var(--color-wife), var(--shadow-md); }
-
     .player-token { position: absolute; bottom: 4px; left: 50%; width: 18px; height: 18px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 5; animation: tokenBounce 0.3s ease; }
     @keyframes tokenBounce { 0% { transform: translateY(-8px) scale(0.8); } 60% { transform: translateY(2px) scale(1.1); } 100% { transform: translateY(0) scale(1); } }
     .player-token.husband { background: var(--color-husband); }
     .player-token.wife { background: var(--color-wife); }
-
     .dice-area { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
     .dice-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .dice-label { font-size: 0.75rem; color: var(--color-text-light); font-weight: 600; }
     .dice { width: 64px; height: 64px; background: var(--color-card); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: var(--shadow-md); border: 2px solid rgba(0,0,0,0.05); }
     .dice.rolling { animation: diceRoll 0.1s ease infinite; }
-    @keyframes diceRoll { 0%, 100% { transform: rotate(0deg) scale(1); } 25% { transform: rotate(-8deg) scale(1.05); } 75% { transform: rotate(8deg) scale(1.05); } }
-
+    @keyframes diceRoll { 0%,100% { transform: rotate(0deg) scale(1); } 25% { transform: rotate(-8deg) scale(1.05); } 75% { transform: rotate(8deg) scale(1.05); } }
     .board-controls { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
-    .modal-content { background: var(--color-card); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; max-width: 340px; width: 100%; box-shadow: var(--shadow-lg); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .modal-content { background: var(--color-card); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; max-width: 340px; width: 100%; box-shadow: var(--shadow-lg); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
     .modal-overlay.active .modal-content { transform: scale(1); }
     .modal-icon { font-size: 48px; margin-bottom: 12px; }
     .modal-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
     .modal-desc { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.6; margin-bottom: 20px; }
 
-    /* ============ QUESTIONS ============ */
     .question-game { padding: 20px; max-width: 520px; margin: 0 auto; }
     .player-select { text-align: center; margin-bottom: 24px; }
     .select-label { font-size: 1rem; font-weight: 600; margin-bottom: 14px; }
@@ -262,53 +169,34 @@
     .player-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
     .player-btn.husband { color: var(--color-husband); }
     .player-btn.wife { color: var(--color-wife); }
-    .player-btn.husband.selected { border-color: var(--color-husband); background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
-    .player-btn.wife.selected { border-color: var(--color-wife); background: linear-gradient(135deg, #FEF2F2, #FECACA); }
+    .player-btn.husband.selected { border-color: var(--color-husband); background: linear-gradient(135deg,#EFF6FF,#DBEAFE); }
+    .player-btn.wife.selected { border-color: var(--color-wife); background: linear-gradient(135deg,#FEF2F2,#FECACA); }
     .player-btn-icon { font-size: 28px; }
-
     .category-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
     .category-chip { padding: 8px 16px; border-radius: 20px; background: var(--color-card); border: 1px solid rgba(0,0,0,0.06); font-size: 0.85rem; font-weight: 600; color: var(--color-text-light); transition: all 0.2s; box-shadow: var(--shadow-sm); }
     .category-chip.active { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: white; border-color: transparent; box-shadow: var(--shadow-glow); }
-
     .question-card { background: var(--color-card); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; box-shadow: var(--shadow-lg); margin-bottom: 20px; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: questionFadeIn 0.4s ease; }
     @keyframes questionFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     .question-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; justify-content: center; }
-    .question-category { font-size: 0.75rem; font-weight: 700; color: var(--color-primary); background: linear-gradient(135deg, #FDF2F8, #FCE7F3); padding: 4px 12px; border-radius: 12px; }
+    .question-category { font-size: 0.75rem; font-weight: 700; color: var(--color-primary); background: linear-gradient(135deg,#FDF2F8,#FCE7F3); padding: 4px 12px; border-radius: 12px; }
     .question-player { font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 12px; }
     .question-player.husband { color: var(--color-husband); background: #EFF6FF; }
     .question-player.wife { color: var(--color-wife); background: #FEF2F2; }
     .question-text { font-size: 1.15rem; font-weight: 600; line-height: 1.7; }
     .question-counter { font-size: 0.8rem; color: var(--color-text-light); margin-top: 16px; }
-
     .question-controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
     .ctrl-btn { padding: 12px 20px; border-radius: 14px; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; background: var(--color-card); border: 1px solid rgba(0,0,0,0.08); box-shadow: var(--shadow-sm); color: var(--color-text); }
     .ctrl-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
     .ctrl-btn.primary { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: white; border: none; box-shadow: var(--shadow-glow); }
     .ctrl-btn.danger { color: var(--color-wife); border-color: rgba(239,68,68,0.2); }
 
-    /* ============ RESPONSIVE ============ */
-    @media (min-width: 768px) {
-      .hero { padding-top: 90px; }
-      .games-grid { max-width: 600px; }
-      .board-container { max-width: 560px; }
-      .tile { min-height: 72px; }
-      .tile-icon { font-size: 22px; }
-    }
-    @media (max-width: 360px) {
-      .hero { padding-top: 45px; }
-      .spin-btn { width: 56px; height: 56px; font-size: 0.75rem; }
-      .wheel-emoji { font-size: 20px; }
-      .tile { min-height: 50px; }
-      .tile-icon { font-size: 15px; }
-      .dice { width: 56px; height: 56px; font-size: 28px; }
-      .question-text { font-size: 1.05rem; }
-    }
+    @media (min-width: 768px) { .hero { padding-top: 90px; } .games-grid { max-width: 600px; } .board-container { max-width: 560px; } .tile { min-height: 72px; } .tile-icon { font-size: 22px; } }
+    @media (max-width: 360px) { .hero { padding-top: 45px; } .spin-btn { width: 56px; height: 56px; font-size: 0.75rem; } .wheel-emoji { font-size: 20px; } .tile { min-height: 50px; } .tile-icon { font-size: 15px; } .dice { width: 56px; height: 56px; font-size: 28px; } .question-text { font-size: 1.05rem; } }
   </style>
 </head>
 <body>
   <div id="app">
 
-    <!-- HOME -->
     <section id="page-home" class="page active">
       <div class="hero">
         <h1 class="hero-title">ليلتكم أحلى <span class="heart">❤️</span></h1>
@@ -318,44 +206,26 @@
       <div class="games-grid" id="gamesGrid"></div>
     </section>
 
-    <!-- GAME 1: DOUBLE WHEEL -->
     <section id="page-wheel" class="page">
       <header class="page-header">
         <button class="btn-back" data-back aria-label="العودة">→</button>
         <h2 class="page-title">🎡 عجلة الأوضاع</h2>
       </header>
-
-      <div class="spin-all-container">
-        <button class="btn-primary" id="spinAllBtn">🎲 دَوِّر العجلتين معًا</button>
-      </div>
-
+      <div class="spin-all-container"><button class="btn-primary" id="spinAllBtn">🎲 دَوِّر العجلتين معًا</button></div>
       <div class="wheels-container">
         <div class="wheel-block">
           <h3 class="wheel-label">💕 الأوضاع</h3>
-          <div class="wheel-wrapper">
-            <div class="wheel-pointer"></div>
-            <div class="wheel" id="positionsWheel"></div>
-            <button class="spin-btn" id="spinPositionsBtn">دَوِّر</button>
-          </div>
+          <div class="wheel-wrapper"><div class="wheel-pointer"></div><div class="wheel" id="positionsWheel"></div><button class="spin-btn" id="spinPositionsBtn">دَوِّر</button></div>
           <div class="wheel-count" id="positionsCount"></div>
         </div>
-
         <div class="wheel-block">
           <h3 class="wheel-label">📍 المكان</h3>
-          <div class="wheel-wrapper">
-            <div class="wheel-pointer"></div>
-            <div class="wheel" id="placesWheel"></div>
-            <button class="spin-btn" id="spinPlacesBtn">دَوِّر</button>
-          </div>
+          <div class="wheel-wrapper"><div class="wheel-pointer"></div><div class="wheel" id="placesWheel"></div><button class="spin-btn" id="spinPlacesBtn">دَوِّر</button></div>
         </div>
       </div>
-
       <div class="combination-result hidden" id="combinationResult">
         <div class="result-image" id="resultImage"></div>
-        <div class="result-name-row">
-          <h3 class="result-title" id="resultTitle"></h3>
-          <button class="icon-btn" id="copyNameBtn" title="نسخ الاسم">📋</button>
-        </div>
+        <div class="result-name-row"><h3 class="result-title" id="resultTitle"></h3><button class="icon-btn" id="copyNameBtn" title="نسخ الاسم">📋</button></div>
         <div class="result-place" id="resultPlace"></div>
         <div class="result-actions">
           <button class="ctrl-btn" id="descBtn">ⓘ وصف</button>
@@ -363,7 +233,6 @@
           <button class="ctrl-btn" id="searchBtn">🔎 بحث عن الوضع</button>
         </div>
       </div>
-
       <div class="sheet-overlay" id="descSheet">
         <div class="sheet-content">
           <div class="sheet-handle"></div>
@@ -372,17 +241,14 @@
           <button class="btn-primary" id="sheetCloseBtn">إغلاق</button>
         </div>
       </div>
-
       <div class="toast" id="toast">تم نسخ الاسم ✅</div>
     </section>
 
-    <!-- GAME 2: BOARD -->
     <section id="page-board" class="page">
       <header class="page-header">
         <button class="btn-back" data-back aria-label="العودة">→</button>
         <h2 class="page-title">🎲 لوحة الأزواج</h2>
       </header>
-
       <div class="board-container">
         <div class="turn-indicator husband" id="turnIndicator">دور الزوج 🔵</div>
         <div class="players-info">
@@ -400,7 +266,6 @@
           <button class="btn-secondary" id="resetBoardBtn">🔄 لعبة جديدة</button>
         </div>
       </div>
-
       <div class="modal-overlay" id="boardModal">
         <div class="modal-content">
           <div class="modal-icon" id="modalIcon"></div>
@@ -411,7 +276,6 @@
       </div>
     </section>
 
-    <!-- GAME 3: ROMANTIC QUESTIONS -->
     <section id="page-romantic" class="page">
       <header class="page-header">
         <button class="btn-back" data-back aria-label="العودة">→</button>
@@ -440,7 +304,6 @@
       </div>
     </section>
 
-    <!-- GAME 4: ADVANCED QUESTIONS -->
     <section id="page-advanced" class="page">
       <header class="page-header">
         <button class="btn-back" data-back aria-label="العودة">→</button>
@@ -472,11 +335,8 @@
   </div>
 
   <script>
-    /* ============================================================ */
-    /*  DATA LAYER — كل المحتوى هنا، عدّل بدون لمس الـ Logic        */
-    /* ============================================================ */
-
     const POSITIONS_SOURCE = 'https://www.menshealth.com/sex-women/a19547362/45-sex-positions-guys-should-know/';
+    const IMG_BASE = 'https://raw.githubusercontent.com/inarerp/couples/main/positions/';
 
     const DATA = {
       games: [
@@ -488,64 +348,63 @@
         { id: 'challenge', icon: '🎯', title: 'التحديات',          description: 'قريبًا',                    available: false }
       ],
 
-      /* 56 وضعًا — لإضافة تصميمكم: ضعوا الملف بنفس الرقم في assets/positions/ */
-            positions: [
-        { id: 1,  englishName: 'Stand and Deliver', alternativeNames: ['The Bicycle'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-stand-deliver-1581102532.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يقف أحد الشريكين عند حافة السرير بينما يستلقي الآخر على ظهره رافعًا ساقيه نحو صدره، مع إمساك الكاحلين للدعم، ويُفضَّل إيقاع هادئ.' },
-        { id: 2,  englishName: 'Face Off', alternativeNames: ['The Lap Dance'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-faceoff-v3-1581102194.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس أحد الشريكين على كرسي أو حافة السرير ويجلس الآخر في حضنه مواجهًا له، ويتحكم هو في الإيقاع والحركة.' },
-        { id: 3,  englishName: 'Pearly Gates', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/pearly-gates-2-1650381834.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره ويجلس الآخر فوقه ثم يميل للخلف حتى يستند ظهره إلى صدر شريكه.' },
-        { id: 4,  englishName: 'The Socket', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-thesocket-1581101518.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'من وضع الفارسة المعكوسة، ينحني الشريك المستقبل للأمام مستندًا على مرفقيه مع مد الساقين للخلف.' },
-        { id: 5,  englishName: 'Happy Baby', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/mh-happybaby-1650382591.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'مستوحى من اليوجا: يستلقي المستقبل على ظهره محتضنًا ركبتيه إلى صدره بينما يقترب الشريك الآخر من وضع الركوع. مريح لأسفل الظهر.' },
-        { id: 6,  englishName: 'Standing O', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-standingo-1581101725.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يركع أحد الشريكين بينما يقف الآخر واضعًا إحدى ساقيه على كتفه — وضع مخصص للمداعبة الحميمة.' },
-        { id: 7,  englishName: 'The Little Dipper', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-littledipper-v2-1581101785.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستند المستقبل بيديه على حافة السرير أو كرسيٍ مكوّنًا شكل حرف T، ويتحرك صعودًا وهبوطًا فوق شريكه.' },
-        { id: 8,  englishName: 'The 69 Bridge', alternativeNames: ['Golden Gate'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-69-bridge-v2-1582129462.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة بهلوانية من وضع 69: يستلقي أحد الشريكين على ظهره ويتموضع الآخر فوقه بالاتجاه المعاكس للمداعبة المتبادلة.' },
-        { id: 9,  englishName: 'Coital Alignment Technique', alternativeNames: ['The CAT'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-thecat-1581101913.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يشبه الوضع التبشيري لكن الشريك الأعلى يتقدم لأعلى وللجانب قليلًا مع تلامس ثابت وحركة تأرجح هادئة بدل الدفع.' },
-        { id: 10, englishName: 'The Captain', alternativeNames: ['V is for Victory'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/mh-captain-1650390659.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره رافعًا ساقيه، ويمسك الشريك الآخر الركوع بكاحليه فاتحًا ساقيه على شكل V.' },
-        { id: 11, englishName: 'Waterfall', alternativeNames: ['Head Rush'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-thewaterfall-1581101948.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على حافة السرير بحيث يتدلى رأسه وكتفاه نحو الأرض بينما يجلس الآخر فوقه.' },
-        { id: 12, englishName: 'One Up', alternativeNames: ['Over Your Shoulder', 'The Hamstring Stretch'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-oneup-v2-1581101983.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يركع أحد الشريكين عند حافة السرير بينما يستلقي الآخر رافعًا إحدى ساقيه ومستندًا عليها بيده لتغيير الزاوية.' },
-        { id: 13, englishName: 'The Cowgirl', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-thecowgirl-1581102015.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره ويجلس الآخر فوقه مواجهًا له، متحكمًا بالكامل في الإيقاع والعمق.' },
-        { id: 14, englishName: 'The Hot Seat', alternativeNames: ['The Love Seat'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-hotseat-1581102043.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس أحد الشريكين على كرسي أو حافة السرير ويجلس الآخر بين ساقيه مواجهًا له الظهر، ويتحكم هو في الحركة.' },
-        { id: 15, englishName: 'Spin Cycle', alternativeNames: ['Maytag Repair Man'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-spincycle-1581102077.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة مرحة من وضع Hot Seat تعتمد على سطح يضيف اهتزازًا وحركة إضافية للجلسة.' },
-        { id: 16, englishName: 'Stairway to Heaven', alternativeNames: ['Step Lively'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-stairwaytoheaven-1581102102.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Hot Seat تُمارس على الدرج مع الاستناد إلى الدرابزين للدعم — يُفضَّل أسفل السلم للأمان.' },
-        { id: 17, englishName: 'Reverse Cowgirl', alternativeNames: ['Rodeo Drive', 'Halfway Around the World'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-reversecowgirl-v2-1581102136.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره ويجلس الآخر فوقه مواجهًا بعيدًا عنه، متحكمًا في العمق والإيقاع.' },
-        { id: 18, englishName: 'Thighmaster', alternativeNames: ['Double the Pleasure'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-poleposition-1581102164.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره بثني إحدى ساقيه، ويجلس الآخر فوق الساق المرفوعة مستندًا على الركبة.' },
-        { id: 19, englishName: 'The Lazy Man', alternativeNames: ['The Squat Thrust'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-lazyman-1581102217.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس أحد الشريكين مستندًا إلى وسائد وساقيه ممدودتين، ويجلس الآخر فوقه بقدميه على السرير متحكمًا في الحركة.' },
-        { id: 20, englishName: 'David Copperfield', alternativeNames: ['Trick & Treat'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-davidscopperfield-1581102244.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'وضع مخصص للمداعبة الحميمة: وسادة تحت ورك المستقبل وقدماه على لوحي كتف الشريك الآخر.' },
-        { id: 21, englishName: 'Heir to the Throne', alternativeNames: ['Lazy Girl'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-heirtothethrone-1581102275.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس المستقبل على كرسيٍ وساقيه مفتوحتان، ما يمنح الشريك الآخر رؤية كاملة وحرية المداعبة الحميمة.' },
-        { id: 22, englishName: 'Closed for Business', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-closedbusiness-1581102307.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع One Up مع إبقاء ساقي المستقبل مضمومتين أثناء المداعبة لتحفيز غير مباشر وألطف.' },
-        { id: 23, englishName: 'The Pretzel', alternativeNames: ['The Pretzel Dip', 'The Camel Ride'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-pretzel-1581102338.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على جنبه بينما يركع الآخر متخطيًا إحدى ساقيه، ليجمع بين العمق والتقارب وجهًا لوجه.' },
-        { id: 24, englishName: 'Yourself on the Shelf', alternativeNames: ['The Bicycle'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-yourselfonashelf-1581101522.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس المستقبل على حافة السرير ويدخله الشريك الآخر واقفًا مع تشابك الأذرع والسيقان للدعم المتبادل.' },
-        { id: 25, englishName: 'The G-Whiz', alternativeNames: ['The Shoulder Holder', 'The Anvil'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-gwhiz-v2-1581102368.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره واضعًا ساقيه على كتفي الشريك الآخر، بزاوية تسمح بعمق أكبر — يُبدأ ببطء.' },
-        { id: 26, englishName: 'Doggy Style', alternativeNames: ["Man's Best Friend"], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-mansbestfriend-v2-1581102405.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'الوضع الكلاسيكي من الخلف: المستقبل على أطرافه الأربعة والشريك الآخر يدخله من الخلف بعمق — يُمارَس برفق.' },
-        { id: 27, englishName: 'The Flatiron', alternativeNames: ['Downward Dog', 'The Belly Flop'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-flatiron-v2-1581102438.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على بطنه مع رفع الوركين قليلًا ووسادة تحت البطن، ويدخله الشريك من الخلف دون تحميل وزن.' },
-        { id: 28, englishName: 'Butter Churner', alternativeNames: ['Squat Thruster'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-butterchurner-1581102466.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره رافعًا ساقيه فوق رأسه بينما يجلس الآخر فوقه القرفصاء — يتطلب حذرًا ولطفًا شديدًا.' },
-        { id: 29, englishName: 'The Ballet Dancer', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-theballerina-1581102502.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يقف الشريكان مواجهَين لبعضهما ويرفع المستقبل إحدى ساقيه ويلفّها حول الشريك الآخر — مناسب للمساحات الضيقة.' },
-        { id: 30, englishName: 'Iron Chef', alternativeNames: ['Kitchen Confidential'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-ironchef-v2-1581102562.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Ballet Dancer باستخدام سطح المطبخ كدعم لجلوس المستقبل بارتفاع مناسب.' },
-        { id: 31, englishName: 'H2Ohh Yeah', alternativeNames: ["Aquaman's Delight"], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/mens-health-h2ohhyeah-1581102708.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Ballet Dancer تُمارس في الماء حيث يساعد الطفو على ثبات الوضع بسهولة أكبر.' },
-        { id: 32, englishName: 'Standing Wheelbarrow', alternativeNames: ['The Hoover Maneuver'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-standingwheelbarrow-v2-1581102781.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'دخول من الخلف وضع الوقوف مع رفع المستقبل الذي يشبك ساقيه حول خصر الشريك — وضع رياضي يتطلب لياقة.' },
-        { id: 33, englishName: 'Seated Wheelbarrow', alternativeNames: ['Wheelbarrow at Rest'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-seatedwheelbarrow-1581102856.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة أهدأ من Wheelbarrow يجلس فيها الشريك على حافة السرير أو كرسي مع عمق أكبر وحركة أقل.' },
-        { id: 34, englishName: 'The Standing Dragon', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-standingdragon-v2-1581102893.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يقف المستقبل على أطرافه الأربعة عند حافة السرير مقوّسًا ظهره، ويدخله الشريك من الخلف وضع الوقوف.' },
-        { id: 35, englishName: 'Restroom Attendant', alternativeNames: ["Don't Get Caught"], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-bathroomattendant-v2-1581102921.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'وضع سريع في الحمام: دخول من الخلف بينما ينظر المستقبل في المرآة لتحقيق تواصل بصري.' },
-        { id: 36, englishName: 'Couch Surfer', alternativeNames: ['The Lazy Susan'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-couchsurfer-1581102970.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'ينحني المستقبل على مسند الأريكة ويدخله الشريك من الخلف — خيار مناسب خارج غرفة النوم.' },
-        { id: 37, englishName: 'Quickie-Fix', alternativeNames: ['The Bends'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-quickiefix-1581103047.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'ينحني المستقبل من خصره مستندًا بيديه على أثاث، ويدخله الشريك من الخلف ممسكًا بوركيه للدعم.' },
-        { id: 38, englishName: 'Mountain Climber', alternativeNames: ['The Pushup'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-mountainclimber-1581103074.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يتخذ الشريك الأعلى وضع الضغط (Pushup) بين ساقي الآخر، فيبقى الوزن بعيدًا عن جسد المستقبل مع تواصل بصري.' },
-        { id: 39, englishName: 'Quicker Picker Upper', alternativeNames: ['The Pillow Driver'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-quickerpickerupper-1581103100.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من التبشيري مع وسادة تحت أسفل الظهر لتغيير الزاوية، والشريك الأعلى مستند على يديه بوضع الضغط.' },
-        { id: 40, englishName: 'Missionary', alternativeNames: ['The Matrimonial'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-missionary-v2-1581103126.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'الوضع الكلاسيكي: تقابل وجهًا لوجه مع تلامس كامل للجسد وتواصل بصري يمنح أقصى درجات الحميمية.' },
-        { id: 41, englishName: 'Spoon', alternativeNames: ['The Sleeper Hold'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-spoon-v2-1581103250.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي الشريكان على جنبيهما بالاتجاه نفسه والشريك المعطي خلف الآخر — وضع مريح ومناسب للاسترخاء.' },
-        { id: 42, englishName: 'Open-Legged Spoon', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/open-legged-spoon-3-1650382204.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع الملعقة يرفع فيها المستقبل ساقه العليا ويلفّها للخلف فوق ورك الشريك لوصول أسهل.' },
-        { id: 43, englishName: 'Spork', alternativeNames: ['Spoon and Fork Combo', 'Scissoring'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-spork-1581103273.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره رافعًا ساقه اليمنى ليدخل الشريك بزاوية 90 درجة مع تشابك الساقين كالمقص.' },
-        { id: 44, englishName: 'Gift Wrapped', alternativeNames: ['The Horny Mantis'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-giftwrapped-1581103304.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي الشريكان على جنبيهما متواجهَين، ويلف المعطي ساقيه حول ظهر المستقبل لعمق أكبر مع تقارب.' },
-        { id: 45, englishName: 'Spoon, Facing', alternativeNames: ['Sidewinder'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-spoonfacing-1581103341.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'ملعقة وجهًا لوجه: يستلقي الشريكان على جنبيهما متقابلَين، وضع حميمي يسمح بالعناق والتقبيل — مناسب أثناء الحمل.' },
-        { id: 46, englishName: 'The X Position', alternativeNames: ['Scissoring'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-thexposition-1581103466.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس الشريكان متواجهَين ويعبّر كلٌّ منهما ساقه فوق ساق الآخر مكوّنَين شكل X، ثم يستلقيان بحركة بطيئة هادئة.' },
-        { id: 47, englishName: 'Snow Angel', alternativeNames: ["Bottom's Up"], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-thesnowangel-1581103492.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره ويلف ساقيه حول ظهر الشريك الجالس فوقه مواجهًا بعيدًا، ليساعده على الانزلاق.' },
-        { id: 48, englishName: 'The Fusion', alternativeNames: ['Getting a Leg Up'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-thefusion-1581103569.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'من وضع Spider، يرفع المستقبل ساقيه على كتفي الشريك لزيادة التوتر العضلي وتسهيل الحركة الدائرية.' },
-        { id: 49, englishName: 'The Spider', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-thespider-v2-1581103598.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس الشريكان على السرير متواجهَين مستندَين على ذراعيهما، ثم يتموضع المستقبل فوق الآخر بحركة تأرجح أمامية وخلفية.' },
-        { id: 50, englishName: 'Hovering Butterfly', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-hoveringbutterfly-1581103629.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس المستقبل فوق الشريك المستلقي بركبتين عند أذنيه، ويتحكم هو في الضغط والحركة صعودًا وهبوطًا.' },
-        { id: 51, englishName: '69', alternativeNames: ['Inverted 69', 'Over and Under'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/men-shealth-sexillustration-inverted-edit-1581103938.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'الوضع الشهير للمداعبة المتبادلة في آنٍ واحد، سواء كان أحد الشريكين فوق الآخر أو على الجنبين.' },
-        { id: 52, englishName: 'The Face Sitter', alternativeNames: ['Hovering Dragonfly'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-thefacesitter-1581103963.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي الشريك المعطي ووسادة خلف رأسه، ويجلس الآخر فوق كتفيه مستندًا إلى لوح السرير أو الحائط.' },
-        { id: 53, englishName: 'The Elevator', alternativeNames: ['The Bees Knees'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-theelevator-1581103992.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'وضع مخصص للمداعبة الفموية بحركة صعود وهبوط بطيئة ومتدرجة مع تنويع في السرعة.' },
-        { id: 54, englishName: 'Swiss Ball Blitz', alternativeNames: ['Romper Room'], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/menshealth-theswissballblitz-1581104156.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Hot Seat باستخدام كرة التمرين (Stability Ball) لإضافة حركة وارتداد، مع الاستناد للحائط للتوازن.' },
-        { id: 55, englishName: 'Magic Mountain', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/magicmountain-final-65e0c3f988bb5.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يركع المستقبل منحنيًا فوق أثاث منخفض أو وسائد، ويقترب الشريك الآخر من الخلف بركوع مع تلامس جسدي — يُمارَس ببطء.' },
-        { id: 56, englishName: 'The Seashell', alternativeNames: [], imageUrl: 'https://raw.githubusercontent.com/inarerp/couples/main/positions/seashell-final-660574ea9c191.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يشبه Happy Baby لكن بانثناء أعمق: يرفع المستقبل ساقيه بجانب رأسه ويدخله الشريك مواجهًا له — يتطلب مرونة، والوسادة تحت الورك تريحه.' }
+      positions: [
+        { id: 1,  englishName: 'Stand and Deliver', alternativeNames: ['The Bicycle'], imageUrl: IMG_BASE+'men-shealth-stand-deliver-1581102532.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يقف أحد الشريكين عند حافة السرير بينما يستلقي الآخر على ظهره رافعًا ساقيه نحو صدره، مع إمساك الكاحلين للدعم، ويُفضَّل إيقاع هادئ.' },
+        { id: 2,  englishName: 'Face Off', alternativeNames: ['The Lap Dance'], imageUrl: IMG_BASE+'menshealth-faceoff-v3-1581102194.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس أحد الشريكين على كرسي أو حافة السرير ويجلس الآخر في حضنه مواجهًا له، ويتحكم هو في الإيقاع والحركة.' },
+        { id: 3,  englishName: 'Pearly Gates', alternativeNames: [], imageUrl: IMG_BASE+'pearly-gates-2-1650381834.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره ويجلس الآخر فوقه ثم يميل للخلف حتى يستند ظهره إلى صدر شريكه.' },
+        { id: 4,  englishName: 'The Socket', alternativeNames: [], imageUrl: IMG_BASE+'men-shealth-thesocket-1581101518.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'من وضع الفارسة المعكوسة، ينحني الشريك المستقبل للأمام مستندًا على مرفقيه مع مد الساقين للخلف.' },
+        { id: 5,  englishName: 'Happy Baby', alternativeNames: [], imageUrl: IMG_BASE+'mh-happybaby-1650382591.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'مستوحى من اليوجا: يستلقي المستقبل على ظهره محتضنًا ركبتيه إلى صدره بينما يقترب الشريك الآخر من وضع الركوع. مريح لأسفل الظهر.' },
+        { id: 6,  englishName: 'Standing O', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-standingo-1581101725.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يركع أحد الشريكين بينما يقف الآخر واضعًا إحدى ساقيه على كتفه — وضع مخصص للمداعبة الحميمة.' },
+        { id: 7,  englishName: 'The Little Dipper', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-littledipper-v2-1581101785.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستند المستقبل بيديه على حافة السرير أو كرسيٍ مكوّنًا شكل حرف T، ويتحرك صعودًا وهبوطًا فوق شريكه.' },
+        { id: 8,  englishName: 'The 69 Bridge', alternativeNames: ['Golden Gate'], imageUrl: IMG_BASE+'men-shealth-69-bridge-v2-1582129462.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة بهلوانية من وضع 69: يستلقي أحد الشريكين على ظهره ويتموضع الآخر فوقه بالاتجاه المعاكس للمداعبة المتبادلة.' },
+        { id: 9,  englishName: 'Coital Alignment Technique', alternativeNames: ['The CAT'], imageUrl: IMG_BASE+'men-shealth-thecat-1581101913.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يشبه الوضع التبشيري لكن الشريك الأعلى يتقدم لأعلى وللجانب قليلًا مع تلامس ثابت وحركة تأرجح هادئة بدل الدفع.' },
+        { id: 10, englishName: 'The Captain', alternativeNames: ['V is for Victory'], imageUrl: IMG_BASE+'mh-captain-1650390659.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره رافعًا ساقيه، ويمسك الشريك الآخر الركوع بكاحليه فاتحًا ساقيه على شكل V.' },
+        { id: 11, englishName: 'Waterfall', alternativeNames: ['Head Rush'], imageUrl: IMG_BASE+'men-shealth-thewaterfall-1581101948.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على حافة السرير بحيث يتدلى رأسه وكتفاه نحو الأرض بينما يجلس الآخر فوقه.' },
+        { id: 12, englishName: 'One Up', alternativeNames: ['Over Your Shoulder', 'The Hamstring Stretch'], imageUrl: IMG_BASE+'men-shealth-oneup-v2-1581101983.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يركع أحد الشريكين عند حافة السرير بينما يستلقي الآخر رافعًا إحدى ساقيه ومستندًا عليها بيده لتغيير الزاوية.' },
+        { id: 13, englishName: 'The Cowgirl', alternativeNames: [], imageUrl: IMG_BASE+'men-shealth-thecowgirl-1581102015.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره ويجلس الآخر فوقه مواجهًا له، متحكمًا بالكامل في الإيقاع والعمق.' },
+        { id: 14, englishName: 'The Hot Seat', alternativeNames: ['The Love Seat'], imageUrl: IMG_BASE+'men-shealth-hotseat-1581102043.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس أحد الشريكين على كرسي أو حافة السرير ويجلس الآخر بين ساقيه مواجهًا له الظهر، ويتحكم هو في الحركة.' },
+        { id: 15, englishName: 'Spin Cycle', alternativeNames: ['Maytag Repair Man'], imageUrl: IMG_BASE+'menshealth-spincycle-1581102077.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة مرحة من وضع Hot Seat تعتمد على سطح يضيف اهتزازًا وحركة إضافية للجلسة.' },
+        { id: 16, englishName: 'Stairway to Heaven', alternativeNames: ['Step Lively'], imageUrl: IMG_BASE+'menshealth-stairwaytoheaven-1581102102.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Hot Seat تُمارس على الدرج مع الاستناد إلى الدرابزين للدعم — يُفضَّل أسفل السلم للأمان.' },
+        { id: 17, englishName: 'Reverse Cowgirl', alternativeNames: ['Rodeo Drive', 'Halfway Around the World'], imageUrl: IMG_BASE+'menshealth-reversecowgirl-v2-1581102136.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره ويجلس الآخر فوقه مواجهًا بعيدًا عنه، متحكمًا في العمق والإيقاع.' },
+        { id: 18, englishName: 'Thighmaster', alternativeNames: ['Double the Pleasure'], imageUrl: IMG_BASE+'menshealth-poleposition-1581102164.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي أحد الشريكين على ظهره بثني إحدى ساقيه، ويجلس الآخر فوق الساق المرفوعة مستندًا على الركبة.' },
+        { id: 19, englishName: 'The Lazy Man', alternativeNames: ['The Squat Thrust'], imageUrl: IMG_BASE+'menshealth-lazyman-1581102217.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس أحد الشريكين مستندًا إلى وسائد وساقيه ممدودتين، ويجلس الآخر فوقه بقدميه على السرير متحكمًا في الحركة.' },
+        { id: 20, englishName: 'David Copperfield', alternativeNames: ['Trick & Treat'], imageUrl: IMG_BASE+'menshealth-davidscopperfield-1581102244.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'وضع مخصص للمداعبة الحميمة: وسادة تحت ورك المستقبل وقدماه على لوحي كتف الشريك الآخر.' },
+        { id: 21, englishName: 'Heir to the Throne', alternativeNames: ['Lazy Girl'], imageUrl: IMG_BASE+'menshealth-heirtothethrone-1581102275.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس المستقبل على كرسيٍ وساقيه مفتوحتان، ما يمنح الشريك الآخر رؤية كاملة وحرية المداعبة الحميمة.' },
+        { id: 22, englishName: 'Closed for Business', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-closedbusiness-1581102307.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع One Up مع إبقاء ساقي المستقبل مضمومتين أثناء المداعبة لتحفيز غير مباشر وألطف.' },
+        { id: 23, englishName: 'The Pretzel', alternativeNames: ['The Pretzel Dip', 'The Camel Ride'], imageUrl: IMG_BASE+'men-shealth-pretzel-1581102338.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على جنبه بينما يركع الآخر متخطيًا إحدى ساقيه، ليجمع بين العمق والتقارب وجهًا لوجه.' },
+        { id: 24, englishName: 'Yourself on the Shelf', alternativeNames: ['The Bicycle'], imageUrl: IMG_BASE+'menshealth-yourselfonashelf-1581101522.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس المستقبل على حافة السرير ويدخله الشريك الآخر واقفًا مع تشابك الأذرع والسيقان للدعم المتبادل.' },
+        { id: 25, englishName: 'The G-Whiz', alternativeNames: ['The Shoulder Holder', 'The Anvil'], imageUrl: IMG_BASE+'menshealth-gwhiz-v2-1581102368.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره واضعًا ساقيه على كتفي الشريك الآخر، بزاوية تسمح بعمق أكبر — يُبدأ ببطء.' },
+        { id: 26, englishName: 'Doggy Style', alternativeNames: ["Man's Best Friend"], imageUrl: IMG_BASE+'menshealth-mansbestfriend-v2-1581102405.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'الوضع الكلاسيكي من الخلف: المستقبل على أطرافه الأربعة والشريك الآخر يدخله من الخلف بعمق — يُمارَس برفق.' },
+        { id: 27, englishName: 'The Flatiron', alternativeNames: ['Downward Dog', 'The Belly Flop'], imageUrl: IMG_BASE+'men-shealth-flatiron-v2-1581102438.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على بطنه مع رفع الوركين قليلًا ووسادة تحت البطن، ويدخله الشريك من الخلف دون تحميل وزن.' },
+        { id: 28, englishName: 'Butter Churner', alternativeNames: ['Squat Thruster'], imageUrl: IMG_BASE+'menshealth-butterchurner-1581102466.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره رافعًا ساقيه فوق رأسه بينما يجلس الآخر فوقه القرفصاء — يتطلب حذرًا ولطفًا شديدًا.' },
+        { id: 29, englishName: 'The Ballet Dancer', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-theballerina-1581102502.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يقف الشريكان مواجهَين لبعضهما ويرفع المستقبل إحدى ساقيه ويلفّها حول الشريك الآخر — مناسب للمساحات الضيقة.' },
+        { id: 30, englishName: 'Iron Chef', alternativeNames: ['Kitchen Confidential'], imageUrl: IMG_BASE+'menshealth-ironchef-v2-1581102562.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Ballet Dancer باستخدام سطح المطبخ كدعم لجلوس المستقبل بارتفاع مناسب.' },
+        { id: 31, englishName: 'H2Ohh Yeah', alternativeNames: ["Aquaman's Delight"], imageUrl: IMG_BASE+'mens-health-h2ohhyeah-1581102708.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Ballet Dancer تُمارس في الماء حيث يساعد الطفو على ثبات الوضع بسهولة أكبر.' },
+        { id: 32, englishName: 'Standing Wheelbarrow', alternativeNames: ['The Hoover Maneuver'], imageUrl: IMG_BASE+'menshealth-standingwheelbarrow-v2-1581102781.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'دخول من الخلف وضع الوقوف مع رفع المستقبل الذي يشبك ساقيه حول خصر الشريك — وضع رياضي يتطلب لياقة.' },
+        { id: 33, englishName: 'Seated Wheelbarrow', alternativeNames: ['Wheelbarrow at Rest'], imageUrl: IMG_BASE+'men-shealth-seatedwheelbarrow-1581102856.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة أهدأ من Wheelbarrow يجلس فيها الشريك على حافة السرير أو كرسي مع عمق أكبر وحركة أقل.' },
+        { id: 34, englishName: 'The Standing Dragon', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-standingdragon-v2-1581102893.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يقف المستقبل على أطرافه الأربعة عند حافة السرير مقوّسًا ظهره، ويدخله الشريك من الخلف وضع الوقوف.' },
+        { id: 35, englishName: 'Restroom Attendant', alternativeNames: ["Don't Get Caught"], imageUrl: IMG_BASE+'menshealth-bathroomattendant-v2-1581102921.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'وضع سريع في الحمام: دخول من الخلف بينما ينظر المستقبل في المرآة لتحقيق تواصل بصري.' },
+        { id: 36, englishName: 'Couch Surfer', alternativeNames: ['The Lazy Susan'], imageUrl: IMG_BASE+'menshealth-couchsurfer-1581102970.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'ينحني المستقبل على مسند الأريكة ويدخله الشريك من الخلف — خيار مناسب خارج غرفة النوم.' },
+        { id: 37, englishName: 'Quickie-Fix', alternativeNames: ['The Bends'], imageUrl: IMG_BASE+'menshealth-quickiefix-1581103047.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'ينحني المستقبل من خصره مستندًا بيديه على أثاث، ويدخله الشريك من الخلف ممسكًا بوركيه للدعم.' },
+        { id: 38, englishName: 'Mountain Climber', alternativeNames: ['The Pushup'], imageUrl: IMG_BASE+'menshealth-mountainclimber-1581103074.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يتخذ الشريك الأعلى وضع الضغط (Pushup) بين ساقي الآخر، فيبقى الوزن بعيدًا عن جسد المستقبل مع تواصل بصري.' },
+        { id: 39, englishName: 'Quicker Picker Upper', alternativeNames: ['The Pillow Driver'], imageUrl: IMG_BASE+'menshealth-quickerpickerupper-1581103100.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من التبشيري مع وسادة تحت أسفل الظهر لتغيير الزاوية، والشريك الأعلى مستند على يديه بوضع الضغط.' },
+        { id: 40, englishName: 'Missionary', alternativeNames: ['The Matrimonial'], imageUrl: IMG_BASE+'men-shealth-missionary-v2-1581103126.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'الوضع الكلاسيكي: تقابل وجهًا لوجه مع تلامس كامل للجسد وتواصل بصري يمنح أقصى درجات الحميمية.' },
+        { id: 41, englishName: 'Spoon', alternativeNames: ['The Sleeper Hold'], imageUrl: IMG_BASE+'men-shealth-spoon-v2-1581103250.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي الشريكان على جنبيهما بالاتجاه نفسه والشريك المعطي خلف الآخر — وضع مريح ومناسب للاسترخاء.' },
+        { id: 42, englishName: 'Open-Legged Spoon', alternativeNames: [], imageUrl: IMG_BASE+'open-legged-spoon-3-1650382204.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع الملعقة يرفع فيها المستقبل ساقه العليا ويلفّها للخلف فوق ورك الشريك لوصول أسهل.' },
+        { id: 43, englishName: 'Spork', alternativeNames: ['Spoon and Fork Combo', 'Scissoring'], imageUrl: IMG_BASE+'menshealth-spork-1581103273.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره رافعًا ساقه اليمنى ليدخل الشريك بزاوية 90 درجة مع تشابك الساقين كالمقص.' },
+        { id: 44, englishName: 'Gift Wrapped', alternativeNames: ['The Horny Mantis'], imageUrl: IMG_BASE+'menshealth-giftwrapped-1581103304.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي الشريكان على جنبيهما متواجهَين، ويلف المعطي ساقيه حول ظهر المستقبل لعمق أكبر مع تقارب.' },
+        { id: 45, englishName: 'Spoon, Facing', alternativeNames: ['Sidewinder'], imageUrl: IMG_BASE+'menshealth-spoonfacing-1581103341.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'ملعقة وجهًا لوجه: يستلقي الشريكان على جنبيهما متقابلَين، وضع حميمي يسمح بالعناق والتقبيل — مناسب أثناء الحمل.' },
+        { id: 46, englishName: 'The X Position', alternativeNames: ['Scissoring'], imageUrl: IMG_BASE+'menshealth-thexposition-1581103466.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس الشريكان متواجهَين ويعبّر كلٌّ منهما ساقه فوق ساق الآخر مكوّنَين شكل X، ثم يستلقيان بحركة بطيئة هادئة.' },
+        { id: 47, englishName: 'Snow Angel', alternativeNames: ["Bottom's Up"], imageUrl: IMG_BASE+'menshealth-thesnowangel-1581103492.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي المستقبل على ظهره ويلف ساقيه حول ظهر الشريك الجالس فوقه مواجهًا بعيدًا، ليساعده على الانزلاق.' },
+        { id: 48, englishName: 'The Fusion', alternativeNames: ['Getting a Leg Up'], imageUrl: IMG_BASE+'menshealth-thefusion-1581103569.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'من وضع Spider، يرفع المستقبل ساقيه على كتفي الشريك لزيادة التوتر العضلي وتسهيل الحركة الدائرية.' },
+        { id: 49, englishName: 'The Spider', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-thespider-v2-1581103598.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس الشريكان على السرير متواجهَين مستندَين على ذراعيهما، ثم يتموضع المستقبل فوق الآخر بحركة تأرجح أمامية وخلفية.' },
+        { id: 50, englishName: 'Hovering Butterfly', alternativeNames: [], imageUrl: IMG_BASE+'menshealth-hoveringbutterfly-1581103629.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يجلس المستقبل فوق الشريك المستلقي بركبتين عند أذنيه، ويتحكم هو في الضغط والحركة صعودًا وهبوطًا.' },
+        { id: 51, englishName: '69', alternativeNames: ['Inverted 69', 'Over and Under'], imageUrl: IMG_BASE+'men-shealth-sexillustration-inverted-edit-1581103938.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'الوضع الشهير للمداعبة المتبادلة في آنٍ واحد، سواء كان أحد الشريكين فوق الآخر أو على الجنبين.' },
+        { id: 52, englishName: 'The Face Sitter', alternativeNames: ['Hovering Dragonfly'], imageUrl: IMG_BASE+'menshealth-thefacesitter-1581103963.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يستلقي الشريك المعطي ووسادة خلف رأسه، ويجلس الآخر فوق كتفيه مستندًا إلى لوح السرير أو الحائط.' },
+        { id: 53, englishName: 'The Elevator', alternativeNames: ['The Bees Knees'], imageUrl: IMG_BASE+'menshealth-theelevator-1581103992.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'وضع مخصص للمداعبة الفموية بحركة صعود وهبوط بطيئة ومتدرجة مع تنويع في السرعة.' },
+        { id: 54, englishName: 'Swiss Ball Blitz', alternativeNames: ['Romper Room'], imageUrl: IMG_BASE+'menshealth-theswissballblitz-1581104156.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'نسخة من وضع Hot Seat باستخدام كرة التمرين (Stability Ball) لإضافة حركة وارتداد، مع الاستناد للحائط للتوازن.' },
+        { id: 55, englishName: 'Magic Mountain', alternativeNames: [], imageUrl: IMG_BASE+'magicmountain-final-65e0c3f988bb5.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يركع المستقبل منحنيًا فوق أثاث منخفض أو وسائد، ويقترب الشريك الآخر من الخلف بركوع مع تلامس جسدي — يُمارَس ببطء.' },
+        { id: 56, englishName: 'The Seashell', alternativeNames: [], imageUrl: IMG_BASE+'seashell-final-660574ea9c191.jpg', sourceUrl: POSITIONS_SOURCE, descriptionAr: 'يشبه Happy Baby لكن بانثناء أعمق: يرفع المستقبل ساقيه بجانب رأسه ويدخله الشريك مواجهًا له — يتطلب مرونة، والوسادة تحت الورك تريحه.' }
       ],
 
       places: [
@@ -653,67 +512,36 @@
       ]
     };
 
-    /* ============================================================ */
-    /*  UTILITIES                                                    */
-    /* ============================================================ */
     const Utils = {
       $(sel) { return document.querySelector(sel); },
       $$(sel) { return document.querySelectorAll(sel); },
       randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; },
-      shuffle(arr) {
-        const a = [...arr];
-        for (let i = a.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-      },
+      shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; },
       sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
     };
 
-    /* ============================================================ */
-    /*  APP — NAVIGATION                                             */
-    /* ============================================================ */
     const App = {
       currentPage: 'home',
-
       navigateTo(pageId) {
         const targetEl = Utils.$(`#page-${pageId}`);
         if (!targetEl || this.currentPage === pageId) return;
-
         const currentEl = Utils.$(`#page-${this.currentPage}`);
-        if (currentEl) {
-          currentEl.classList.remove('active');
-          currentEl.classList.add('slide-out-left');
-        }
-
+        if (currentEl) { currentEl.classList.remove('active'); currentEl.classList.add('slide-out-left'); }
         targetEl.classList.add('active');
         targetEl.classList.remove('slide-out-left');
         this.currentPage = pageId;
-
         if (pageId === 'wheel') WheelGame.onEnter();
         if (pageId === 'board') BoardGame.onEnter();
         if (pageId === 'romantic') RomanticQuestionsGame.onEnter();
         if (pageId === 'advanced') AdvancedQuestionsGame.onEnter();
-
         targetEl.scrollTop = 0;
       },
-
       goHome() { this.navigateTo('home'); },
-
-      init() {
-        Utils.$$('[data-back]').forEach(btn => {
-          btn.addEventListener('click', () => this.goHome());
-        });
-      }
+      init() { Utils.$$('[data-back]').forEach(btn => btn.addEventListener('click', () => this.goHome())); }
     };
 
-    /* ============================================================ */
-    /*  HOME PAGE                                                    */
-    /* ============================================================ */
     const HomePage = {
       init() { this.render(); this.bindEvents(); },
-
       render() {
         const grid = Utils.$('#gamesGrid');
         grid.innerHTML = '';
@@ -723,16 +551,11 @@
           card.dataset.game = game.id;
           card.innerHTML = `
             <div class="card-icon">${game.icon}</div>
-            <div class="card-body">
-              <h3 class="card-title">${game.title}</h3>
-              <p class="card-desc">${game.description}</p>
-            </div>
-            ${game.available ? '<div class="card-arrow">←</div>' : '<div class="card-badge">قريبًا</div>'}
-          `;
+            <div class="card-body"><h3 class="card-title">${game.title}</h3><p class="card-desc">${game.description}</p></div>
+            ${game.available ? '<div class="card-arrow">←</div>' : '<div class="card-badge">قريبًا</div>'}`;
           grid.appendChild(card);
         });
       },
-
       bindEvents() {
         Utils.$('#gamesGrid').addEventListener('click', (e) => {
           const card = e.target.closest('.game-card');
@@ -743,54 +566,22 @@
       }
     };
 
-    /* ============================================================ */
-    /*  GAME 1: DOUBLE WHEEL                                         */
-    /* ============================================================ */
     const WheelGame = {
-      initialized: false,
-      positionsWheel: null,
-      placesWheel: null,
-      positionsResult: null,
-      placesResult: null,
-      _toastTimer: null,
-
-      onEnter() {
-        if (!this.initialized) { this.init(); this.initialized = true; }
-      },
-
+      initialized: false, positionsWheel: null, placesWheel: null,
+      positionsResult: null, placesResult: null, _toastTimer: null,
+      onEnter() { if (!this.initialized) { this.init(); this.initialized = true; } },
       init() {
-        this.positionsWheel = this.createWheel({
-          element: Utils.$('#positionsWheel'),
-          options: DATA.positions,
-          showEmojis: false,
-          colors: ['#EC4899', '#F472B6', '#A78BFA', '#8B5CF6', '#F59E0B']
-        });
-        this.placesWheel = this.createWheel({
-          element: Utils.$('#placesWheel'),
-          options: DATA.places,
-          showEmojis: true,
-          colors: ['#EC4899', '#A78BFA', '#F59E0B', '#60A5FA', '#34D399', '#FB923C', '#8B5CF6']
-        });
+        this.positionsWheel = this.createWheel({ element: Utils.$('#positionsWheel'), options: DATA.positions, showEmojis: false, colors: ['#EC4899','#F472B6','#A78BFA','#8B5CF6','#F59E0B'] });
+        this.placesWheel = this.createWheel({ element: Utils.$('#placesWheel'), options: DATA.places, showEmojis: true, colors: ['#EC4899','#A78BFA','#F59E0B','#60A5FA','#34D399','#FB923C','#8B5CF6'] });
         Utils.$('#positionsCount').textContent = `${DATA.positions.length} وضعًا متاحًا`;
         this.bindEvents();
       },
-
       createWheel(config) {
-        const wheel = {
-          element: config.element, options: config.options,
-          showEmojis: config.showEmojis, colors: config.colors,
-          rotation: 0, isSpinning: false, currentResult: null
-        };
-
+        const wheel = { element: config.element, options: config.options, showEmojis: config.showEmojis, colors: config.colors, rotation: 0, isSpinning: false, currentResult: null };
         const numOptions = wheel.options.length;
         const segmentAngle = 360 / numOptions;
-
-        const gradientStops = wheel.options.map((_, i) => {
-          const color = wheel.colors[i % wheel.colors.length];
-          return `${color} ${i * segmentAngle}deg ${(i + 1) * segmentAngle}deg`;
-        });
+        const gradientStops = wheel.options.map((_, i) => `${wheel.colors[i % wheel.colors.length]} ${i * segmentAngle}deg ${(i + 1) * segmentAngle}deg`);
         wheel.element.style.background = `conic-gradient(from 0deg, ${gradientStops.join(', ')})`;
-
         if (wheel.showEmojis) {
           const wheelSize = wheel.element.offsetWidth || 280;
           const emojiRadius = wheelSize * 0.355;
@@ -803,58 +594,42 @@
             wheel.element.appendChild(emoji);
           });
         }
-
         wheel.spin = () => {
           if (wheel.isSpinning) return null;
           wheel.isSpinning = true;
-
           const targetIndex = Utils.randomInt(0, wheel.options.length - 1);
           const targetOption = wheel.options[targetIndex];
           const targetCenter = targetIndex * segmentAngle + segmentAngle / 2;
           const targetRotationMod = (360 - targetCenter) % 360;
-
           let additional = targetRotationMod - (wheel.rotation % 360);
           if (additional < 0) additional += 360;
-
           wheel.rotation += additional + Utils.randomInt(5, 8) * 360;
           wheel.element.style.transition = 'transform 4s cubic-bezier(0.15, 0.85, 0.22, 1)';
           wheel.element.style.transform = `rotate(${wheel.rotation}deg)`;
-
           setTimeout(() => {
             wheel.isSpinning = false;
             wheel.currentResult = targetOption;
             wheel.element.classList.add('just-stopped');
             setTimeout(() => wheel.element.classList.remove('just-stopped'), 1200);
           }, 4100);
-
           return targetOption;
         };
-
         return wheel;
       },
-
       spinPositions() {
         const result = this.positionsWheel.spin();
         if (!result) return;
         this.positionsResult = result;
         Utils.$('#spinPositionsBtn').disabled = true;
-        setTimeout(() => {
-          Utils.$('#spinPositionsBtn').disabled = false;
-          this.updateCombinationResult();
-        }, 4200);
+        setTimeout(() => { Utils.$('#spinPositionsBtn').disabled = false; this.updateCombinationResult(); }, 4200);
       },
-
       spinPlaces() {
         const result = this.placesWheel.spin();
         if (!result) return;
         this.placesResult = result;
         Utils.$('#spinPlacesBtn').disabled = true;
-        setTimeout(() => {
-          Utils.$('#spinPlacesBtn').disabled = false;
-          this.updateCombinationResult();
-        }, 4200);
+        setTimeout(() => { Utils.$('#spinPlacesBtn').disabled = false; this.updateCombinationResult(); }, 4200);
       },
-
       spinAll() {
         if (this.positionsWheel.isSpinning || this.placesWheel.isSpinning) return;
         Utils.$('#spinAllBtn').disabled = true;
@@ -869,77 +644,51 @@
           this.updateCombinationResult();
         }, 4200);
       },
-
       updateCombinationResult() {
         if (!this.positionsResult || !this.placesResult) return;
         const pos = this.positionsResult;
         const place = this.placesResult;
-
-        // Placeholder أنيق لحد ما تضيفوا تصميماتكم — الصور اختيارية تمامًا
-        const gradients = [
-          'linear-gradient(135deg, #FDF2F8, #EDE9FE)',
-          'linear-gradient(135deg, #FCE7F3, #FDF2F8)',
-          'linear-gradient(135deg, #FEF3C7, #FCE7F3)',
-          'linear-gradient(135deg, #EDE9FE, #DBEAFE)'
-        ];
-        const emojis = ['💕', '💞', '🔥', '💋', '🌹', '✨', '💗', '😍'];
-
+        const gradients = ['linear-gradient(135deg,#FDF2F8,#EDE9FE)','linear-gradient(135deg,#FCE7F3,#FDF2F8)','linear-gradient(135deg,#FEF3C7,#FCE7F3)','linear-gradient(135deg,#EDE9FE,#DBEAFE)'];
+        const emojis = ['💕','','🔥','💋','🌹','✨','💗',''];
         const imageContainer = Utils.$('#resultImage');
+        imageContainer.classList.remove('img-loaded');
         imageContainer.style.background = gradients[pos.id % gradients.length];
         imageContainer.innerHTML = `
           <span class="placeholder-emoji">${emojis[pos.id % emojis.length]}</span>
           <div class="placeholder-note">🎨 تصميمكم هنا قريبًا</div>
-          <img src="${pos.imageUrl}" alt="${pos.englishName}" onerror="this.remove()">
+          <img src="${pos.imageUrl}" alt="${pos.englishName}" onerror="this.remove()" onload="this.parentElement.classList.add('img-loaded')">
         `;
-
         Utils.$('#resultTitle').textContent = pos.englishName;
         Utils.$('#resultPlace').innerHTML = `📍 ${place.title}`;
-
         const container = Utils.$('#combinationResult');
         container.classList.remove('hidden');
         container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       },
-
-      copyName() {
-        if (!this.positionsResult) return;
-        this.copyText(this.positionsResult.englishName);
-      },
-
+      copyName() { if (!this.positionsResult) return; this.copyText(this.positionsResult.englishName); },
       copyText(text) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text)
-            .then(() => this.showToast())
-            .catch(() => this.fallbackCopy(text));
-        } else {
-          this.fallbackCopy(text);
-        }
+          navigator.clipboard.writeText(text).then(() => this.showToast()).catch(() => this.fallbackCopy(text));
+        } else { this.fallbackCopy(text); }
       },
-
       fallbackCopy(text) {
         const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
         try { document.execCommand('copy'); } catch (e) {}
         document.body.removeChild(ta);
         this.showToast();
       },
-
       showToast() {
         const toast = Utils.$('#toast');
         toast.classList.add('show');
         clearTimeout(this._toastTimer);
         this._toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
       },
-
       searchPosition() {
         if (!this.positionsResult) return;
         const q = encodeURIComponent(this.positionsResult.englishName + ' sex position');
         window.open('https://www.google.com/search?q=' + q, '_blank');
       },
-
       openDescSheet() {
         const pos = this.positionsResult;
         if (!pos) return;
@@ -947,9 +696,7 @@
         Utils.$('#sheetText').textContent = pos.descriptionAr;
         Utils.$('#descSheet').classList.add('active');
       },
-
       closeDescSheet() { Utils.$('#descSheet').classList.remove('active'); },
-
       bindEvents() {
         Utils.$('#spinPositionsBtn').addEventListener('click', () => this.spinPositions());
         Utils.$('#spinPlacesBtn').addEventListener('click', () => this.spinPlaces());
@@ -959,35 +706,16 @@
         Utils.$('#searchBtn').addEventListener('click', () => this.searchPosition());
         Utils.$('#descBtn').addEventListener('click', () => this.openDescSheet());
         Utils.$('#sheetCloseBtn').addEventListener('click', () => this.closeDescSheet());
-        Utils.$('#descSheet').addEventListener('click', (e) => {
-          if (e.target === e.currentTarget) this.closeDescSheet();
-        });
+        Utils.$('#descSheet').addEventListener('click', (e) => { if (e.target === e.currentTarget) this.closeDescSheet(); });
       }
     };
 
-    /* ============================================================ */
-    /*  GAME 2: COUPLES BOARD                                        */
-    /* ============================================================ */
     const BoardGame = {
       initialized: false,
-      players: [
-        { id: 'husband', name: 'الزوج', position: 0, skipNext: false },
-        { id: 'wife', name: 'الزوجة', position: 0, skipNext: false }
-      ],
-      currentPlayerIndex: 0,
-      isRolling: false,
-      isMoving: false,
-      isGameOver: false,
-
+      players: [ { id: 'husband', name: 'الزوج', position: 0, skipNext: false }, { id: 'wife', name: 'الزوجة', position: 0, skipNext: false } ],
+      currentPlayerIndex: 0, isRolling: false, isMoving: false, isGameOver: false,
       onEnter() { if (!this.initialized) { this.init(); this.initialized = true; } },
-
-      init() {
-        this.renderBoard();
-        this.renderTokens();
-        this.bindEvents();
-        this.updateTurnIndicator();
-      },
-
+      init() { this.renderBoard(); this.renderTokens(); this.bindEvents(); this.updateTurnIndicator(); },
       renderBoard() {
         const grid = Utils.$('#boardGrid');
         grid.innerHTML = '';
@@ -999,14 +727,10 @@
           grid.appendChild(tileEl);
         });
       },
-
       renderTokens() {
         Utils.$$('.player-token').forEach(t => t.remove());
         const positions = {};
-        this.players.forEach(p => {
-          if (!positions[p.position]) positions[p.position] = [];
-          positions[p.position].push(p);
-        });
+        this.players.forEach(p => { if (!positions[p.position]) positions[p.position] = []; positions[p.position].push(p); });
         Object.keys(positions).forEach(pos => {
           const tile = Utils.$(`#tile-${pos}`);
           if (!tile) return;
@@ -1019,14 +743,9 @@
           });
         });
         Utils.$$('.tile').forEach(t => t.classList.remove('current-husband', 'current-wife'));
-        this.players.forEach(player => {
-          const tile = Utils.$(`#tile-${player.position}`);
-          if (tile) tile.classList.add(`current-${player.id}`);
-        });
+        this.players.forEach(player => { const tile = Utils.$(`#tile-${player.position}`); if (tile) tile.classList.add(`current-${player.id}`); });
       },
-
       getCurrentPlayer() { return this.players[this.currentPlayerIndex]; },
-
       updateTurnIndicator() {
         const player = this.getCurrentPlayer();
         const indicator = Utils.$('#turnIndicator');
@@ -1035,13 +754,10 @@
         Utils.$('#badgeHusband').classList.toggle('active', player.id === 'husband');
         Utils.$('#badgeWife').classList.toggle('active', player.id === 'wife');
       },
-
       setMessage(text) { Utils.$('#boardMessage').textContent = text; },
-
       async rollDice() {
         if (this.isRolling || this.isMoving || this.isGameOver) return;
         const player = this.getCurrentPlayer();
-
         if (player.skipNext) {
           player.skipNext = false;
           this.setMessage(`${player.name} يفقد دوره! 🚫`);
@@ -1049,26 +765,19 @@
           this.endTurn();
           return;
         }
-
         this.isRolling = true;
         Utils.$('#rollDiceBtn').disabled = true;
-
         const diceEl = Utils.$('#numberDice');
-        const faces = ['⚀', '', '⚂', '⚃', '⚄', ''];
+        const faces = ['⚀','','⚂','⚃','',''];
         diceEl.classList.add('rolling');
-        for (let i = 0; i < 12; i++) {
-          diceEl.textContent = faces[Utils.randomInt(0, 5)];
-          await Utils.sleep(70);
-        }
+        for (let i = 0; i < 12; i++) { diceEl.textContent = faces[Utils.randomInt(0, 5)]; await Utils.sleep(70); }
         const result = Utils.randomInt(1, 6);
         diceEl.textContent = faces[result - 1];
         diceEl.classList.remove('rolling');
-
         this.setMessage(`${player.name} رمى ${result}! 🎲`);
         this.isRolling = false;
         await this.movePlayer(player, result);
       },
-
       async movePlayer(player, steps) {
         this.isMoving = true;
         const maxPosition = DATA.boardTiles.length - 1;
@@ -1081,7 +790,6 @@
         this.isMoving = false;
         await this.handleTileEvent(player);
       },
-
       async movePlayerSilent(player, steps) {
         const direction = steps > 0 ? 1 : -1;
         const count = Math.abs(steps);
@@ -1094,89 +802,57 @@
           await Utils.sleep(300);
         }
       },
-
       async handleTileEvent(player) {
         const tile = DATA.boardTiles[player.position];
         this.setMessage(`${player.name} وصل إلى: ${tile.title}`);
-
         switch (tile.type) {
           case 'challenge': await this.triggerChallenge(player); break;
           case 'romantic': this.showRomanticMoment(); return;
-          case 'advance':
-            this.setMessage(`⏩ تقدم ${tile.value} خانات!`);
-            await Utils.sleep(800);
-            await this.movePlayerSilent(player, tile.value);
-            break;
-          case 'back':
-            this.setMessage(`↩️ ارجع ${tile.value} خانات`);
-            await Utils.sleep(800);
-            await this.movePlayerSilent(player, -tile.value);
-            break;
-          case 'bonus':
-            this.setMessage(`🎁 مكافأة! تقدم ${tile.value} خانات`);
-            await Utils.sleep(800);
-            await this.movePlayerSilent(player, tile.value);
-            break;
-          case 'loseTurn':
-            player.skipNext = true;
-            this.setMessage('🚫 تفقد الدور القادم!');
-            await Utils.sleep(1200);
-            break;
-          case 'finish':
-            this.showWinner(player);
-            return;
+          case 'advance': this.setMessage(`⏩ تقدم ${tile.value} خانات!`); await Utils.sleep(800); await this.movePlayerSilent(player, tile.value); break;
+          case 'back': this.setMessage(`↩️ ارجع ${tile.value} خانات`); await Utils.sleep(800); await this.movePlayerSilent(player, -tile.value); break;
+          case 'bonus': this.setMessage(`🎁 مكافأة! تقدم ${tile.value} خانات`); await Utils.sleep(800); await this.movePlayerSilent(player, tile.value); break;
+          case 'loseTurn': player.skipNext = true; this.setMessage('🚫 تفقد الدور القادم!'); await Utils.sleep(1200); break;
+          case 'finish': this.showWinner(player); return;
         }
         this.endTurn();
       },
-
       async triggerChallenge(player) {
         this.setMessage(`${player.name} يرمي نرد التحدي! 🎲`);
         const diceEl = Utils.$('#challengeDice');
         const icons = DATA.challengeDice.map(c => c.icon);
         diceEl.classList.add('rolling');
-        for (let i = 0; i < 10; i++) {
-          diceEl.textContent = icons[Utils.randomInt(0, icons.length - 1)];
-          await Utils.sleep(80);
-        }
+        for (let i = 0; i < 10; i++) { diceEl.textContent = icons[Utils.randomInt(0, icons.length - 1)]; await Utils.sleep(80); }
         const result = DATA.challengeDice[Utils.randomInt(0, DATA.challengeDice.length - 1)];
         diceEl.textContent = result.icon;
         diceEl.classList.remove('rolling');
         this.showModal(result.icon, result.title, result.description);
       },
-
       showRomanticMoment() {
         const action = DATA.romanticActions[Utils.randomInt(0, DATA.romanticActions.length - 1)];
         this.showModal(action.icon, 'لحظة رومانسية 💕', action.text);
       },
-
       showModal(icon, title, desc) {
         Utils.$('#modalIcon').textContent = icon;
         Utils.$('#modalTitle').textContent = title;
         Utils.$('#modalDesc').textContent = desc;
         Utils.$('#boardModal').classList.add('active');
       },
-
       hideModal() { Utils.$('#boardModal').classList.remove('active'); },
-
       showWinner(player) {
         this.isGameOver = true;
         const emoji = player.id === 'husband' ? '🔵' : '🔴';
         this.showModal('🏆', `${player.name} كسب! ${emoji}`, 'أحسنتم! وصلتوا للنهاية سوا. حبكم قوي! 💕');
         this.setMessage(`🏆 ${player.name} فاز باللعبة!`);
       },
-
       endTurn() {
         this.currentPlayerIndex = this.currentPlayerIndex === 0 ? 1 : 0;
         this.updateTurnIndicator();
         Utils.$('#rollDiceBtn').disabled = false;
       },
-
       resetGame() {
         this.players.forEach(p => { p.position = 0; p.skipNext = false; });
         this.currentPlayerIndex = 0;
-        this.isGameOver = false;
-        this.isRolling = false;
-        this.isMoving = false;
+        this.isGameOver = false; this.isRolling = false; this.isMoving = false;
         Utils.$('#numberDice').textContent = '🎲';
         Utils.$('#challengeDice').textContent = '❓';
         Utils.$('#rollDiceBtn').disabled = false;
@@ -1185,45 +861,24 @@
         this.setMessage('لعبة جديدة! اضغطوا "ارمِ النرد" 🎲');
         this.hideModal();
       },
-
       bindEvents() {
         Utils.$('#rollDiceBtn').addEventListener('click', () => this.rollDice());
         Utils.$('#resetBoardBtn').addEventListener('click', () => this.resetGame());
-        Utils.$('#modalCloseBtn').addEventListener('click', () => {
-          this.hideModal();
-          if (!this.isGameOver) this.endTurn();
-        });
+        Utils.$('#modalCloseBtn').addEventListener('click', () => { this.hideModal(); if (!this.isGameOver) this.endTurn(); });
       }
     };
 
-    /* ============================================================ */
-    /*  QUESTIONS ENGINE (مشترك بين لعبتين الأسئلة)                   */
-    /* ============================================================ */
     const QuestionsEngine = {
       create(config) {
-        const state = {
-          questions: config.questions,
-          categories: config.categories,
-          playerId: null, playerName: null,
-          currentCategory: 'all',
-          deck: [], deckIndex: -1, history: [],
-          isStarted: false
-        };
-
+        const state = { questions: config.questions, categories: config.categories, playerId: null, playerName: null, currentCategory: 'all', deck: [], deckIndex: -1, history: [], isStarted: false };
         const els = {};
-        Object.keys(config.selectors).forEach(key => {
-          els[key] = Utils.$(config.selectors[key]);
-        });
-
+        Object.keys(config.selectors).forEach(key => { els[key] = Utils.$(config.selectors[key]); });
         function buildDeck() {
           let pool = state.questions;
-          if (state.currentCategory !== 'all') {
-            pool = pool.filter(q => q.category === state.currentCategory);
-          }
+          if (state.currentCategory !== 'all') pool = pool.filter(q => q.category === state.currentCategory);
           state.deck = Utils.shuffle(pool);
           state.deckIndex = -1;
         }
-
         function drawNext() {
           if (state.deck.length === 0) return null;
           state.deckIndex++;
@@ -1232,89 +887,52 @@
           state.history.push(question);
           return question;
         }
-
         function renderQuestion(question) {
           if (!question) return;
           els.questionCard.classList.remove('hidden');
           els.controls.classList.remove('hidden');
-          els.questionMeta.innerHTML = `
-            <span class="question-category">${question.category}</span>
-            <span class="question-player ${state.playerId}">${state.playerName}</span>
-          `;
+          els.questionMeta.innerHTML = `<span class="question-category">${question.category}</span><span class="question-player ${state.playerId}">${state.playerName}</span>`;
           els.questionText.textContent = question.text;
           els.counter.textContent = `سؤال ${state.deckIndex + 1} من ${state.deck.length}`;
           els.questionCard.style.animation = 'none';
           void els.questionCard.offsetWidth;
           els.questionCard.style.animation = '';
         }
-
         function renderCategories() {
           els.categories.innerHTML = '';
           els.categories.classList.remove('hidden');
-
           const allChip = document.createElement('button');
           allChip.className = `category-chip ${state.currentCategory === 'all' ? 'active' : ''}`;
           allChip.textContent = 'الكل';
-          allChip.addEventListener('click', () => {
-            state.currentCategory = 'all';
-            buildDeck(); renderCategories(); nextQuestion();
-          });
+          allChip.addEventListener('click', () => { state.currentCategory = 'all'; buildDeck(); renderCategories(); nextQuestion(); });
           els.categories.appendChild(allChip);
-
           state.categories.forEach(cat => {
             const chip = document.createElement('button');
             chip.className = `category-chip ${state.currentCategory === cat ? 'active' : ''}`;
             chip.textContent = cat;
-            chip.addEventListener('click', () => {
-              state.currentCategory = cat;
-              buildDeck(); renderCategories(); nextQuestion();
-            });
+            chip.addEventListener('click', () => { state.currentCategory = cat; buildDeck(); renderCategories(); nextQuestion(); });
             els.categories.appendChild(chip);
           });
         }
-
         function nextQuestion() { const q = drawNext(); if (q) renderQuestion(q); }
-
-        function prevQuestion() {
-          if (state.history.length < 2) return;
-          state.history.pop();
-          const prev = state.history[state.history.length - 1];
-          if (prev) renderQuestion(prev);
-        }
-
+        function prevQuestion() { if (state.history.length < 2) return; state.history.pop(); const prev = state.history[state.history.length - 1]; if (prev) renderQuestion(prev); }
         function randomQuestion() {
-          const pool = state.currentCategory === 'all'
-            ? state.questions
-            : state.questions.filter(q => q.category === state.currentCategory);
+          const pool = state.currentCategory === 'all' ? state.questions : state.questions.filter(q => q.category === state.currentCategory);
           if (pool.length === 0) return;
           const q = pool[Utils.randomInt(0, pool.length - 1)];
           state.history.push(q);
           renderQuestion(q);
         }
-
-        function resetSession() {
-          state.history = [];
-          state.deckIndex = -1;
-          buildDeck();
-          nextQuestion();
-        }
-
+        function resetSession() { state.history = []; state.deckIndex = -1; buildDeck(); nextQuestion(); }
         return {
           state,
           onEnter() { if (!state.isStarted) { this.init(); state.isStarted = true; } },
           init() { this.renderPlayerSelect(); this.bindEvents(); },
-          renderPlayerSelect() {
-            els.playerSelect.classList.remove('hidden');
-            els.categories.classList.add('hidden');
-            els.questionCard.classList.add('hidden');
-            els.controls.classList.add('hidden');
-          },
+          renderPlayerSelect() { els.playerSelect.classList.remove('hidden'); els.categories.classList.add('hidden'); els.questionCard.classList.add('hidden'); els.controls.classList.add('hidden'); },
           selectPlayer(id) {
             state.playerId = id;
             state.playerName = id === 'husband' ? 'الزوج 🔵' : 'الزوجة 🔴';
-            els.playerSelect.querySelectorAll('.player-btn').forEach(btn => {
-              btn.classList.toggle('selected', btn.dataset.player === id);
-            });
+            els.playerSelect.querySelectorAll('.player-btn').forEach(btn => btn.classList.toggle('selected', btn.dataset.player === id));
             buildDeck(); renderCategories(); nextQuestion();
           },
           next() { nextQuestion(); },
@@ -1322,9 +940,7 @@
           random() { randomQuestion(); },
           reset() { resetSession(); },
           bindEvents() {
-            els.playerSelect.querySelectorAll('.player-btn').forEach(btn => {
-              btn.addEventListener('click', () => this.selectPlayer(btn.dataset.player));
-            });
+            els.playerSelect.querySelectorAll('.player-btn').forEach(btn => btn.addEventListener('click', () => this.selectPlayer(btn.dataset.player)));
             els.nextBtn.addEventListener('click', () => this.next());
             els.prevBtn.addEventListener('click', () => this.prev());
             els.randomBtn.addEventListener('click', () => this.random());
@@ -1337,30 +953,15 @@
     const RomanticQuestionsGame = QuestionsEngine.create({
       questions: DATA.romanticQuestions,
       categories: ['مشاعر', 'ذكريات', 'حب', 'مستقبل', 'حياة زوجية', 'مختلط'],
-      selectors: {
-        playerSelect: '#romanticPlayerSelect', categories: '#romanticCategories',
-        questionCard: '#romanticQuestionCard', questionMeta: '#romanticQuestionMeta',
-        questionText: '#romanticQuestionText', counter: '#romanticCounter',
-        controls: '#romanticControls', nextBtn: '#romanticNext', prevBtn: '#romanticPrev',
-        randomBtn: '#romanticRandom', resetBtn: '#romanticReset'
-      }
+      selectors: { playerSelect: '#romanticPlayerSelect', categories: '#romanticCategories', questionCard: '#romanticQuestionCard', questionMeta: '#romanticQuestionMeta', questionText: '#romanticQuestionText', counter: '#romanticCounter', controls: '#romanticControls', nextBtn: '#romanticNext', prevBtn: '#romanticPrev', randomBtn: '#romanticRandom', resetBtn: '#romanticReset' }
     });
 
     const AdvancedQuestionsGame = QuestionsEngine.create({
       questions: DATA.advancedQuestions,
       categories: ['intimacy', 'bold', 'relationship'],
-      selectors: {
-        playerSelect: '#advancedPlayerSelect', categories: '#advancedCategories',
-        questionCard: '#advancedQuestionCard', questionMeta: '#advancedQuestionMeta',
-        questionText: '#advancedQuestionText', counter: '#advancedCounter',
-        controls: '#advancedControls', nextBtn: '#advancedNext', prevBtn: '#advancedPrev',
-        randomBtn: '#advancedRandom', resetBtn: '#advancedReset'
-      }
+      selectors: { playerSelect: '#advancedPlayerSelect', categories: '#advancedCategories', questionCard: '#advancedQuestionCard', questionMeta: '#advancedQuestionMeta', questionText: '#advancedQuestionText', counter: '#advancedCounter', controls: '#advancedControls', nextBtn: '#advancedNext', prevBtn: '#advancedPrev', randomBtn: '#advancedRandom', resetBtn: '#advancedReset' }
     });
 
-    /* ============================================================ */
-    /*  INIT                                                         */
-    /* ============================================================ */
     document.addEventListener('DOMContentLoaded', () => {
       HomePage.init();
       App.init();
